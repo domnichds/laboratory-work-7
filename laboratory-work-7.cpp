@@ -123,6 +123,33 @@ void print_list(DoulbyLinkedList& list)
 	cout << endl;
 }
 
+void sort_by_name(DoulbyLinkedList& list)
+{
+	if (list.head == nullptr || list.head->next == nullptr)
+	{
+		return;
+	}
+	bool swapped = true;
+	while (swapped)
+	{
+		swapped = false;
+		Node* current = list.head;
+
+		while ((*current).next != nullptr)
+		{
+			if ((*current).data.name > (*current).next->data.name)
+			{
+				swap_node(list, current, (*current).next);
+				swapped = true;
+			}
+			else
+			{
+				current = (*current).next;
+			}
+		}
+	}
+}
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
