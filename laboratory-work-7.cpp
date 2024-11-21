@@ -3,30 +3,38 @@
 
 using namespace std;
 
-struct Node
+struct Deposit
 {
-	string data;
+	string name;
+	int summ;
+	string currency;
+	float percent;
+};
+
+struct Node {
+	Deposit data;
 	Node* next;
 	Node* prev;
 };
+
 struct DoulbyLinkedList
 {
 	Node* head = nullptr;
 	Node* tail = nullptr;
 };
 
-Node* createNode(string value)
+Node* createNode(Deposit data)
 {
 	Node* newNode = new Node;
-	(*newNode).data = value;
+	(*newNode).data = data;
 	(*newNode).next = nullptr;
 	(*newNode).prev = nullptr;
 	return newNode;
 }
 
-void push_back(DoulbyLinkedList& list, string value)
+void push_back(DoulbyLinkedList& list, Deposit data)
 {
-	Node* newNode = createNode(value);
+	Node* newNode = createNode(data);
 	if (list.tail == nullptr)
 	{
 		list.head = newNode;
@@ -109,7 +117,7 @@ void print_list(DoulbyLinkedList& list)
 	Node* current = list.head;
 	while (current != nullptr)
 	{
-		cout << (*current).data << " ";
+		cout << (*current).data.name << " ";
 		current = (*current).next;
 	}
 	cout << endl;
@@ -117,6 +125,7 @@ void print_list(DoulbyLinkedList& list)
 
 int main()
 {
+	setlocale(LC_ALL, "Russian");
 	DoulbyLinkedList list;
 }
 
