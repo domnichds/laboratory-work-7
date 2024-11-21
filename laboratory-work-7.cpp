@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -8,7 +11,7 @@ struct Deposit
 	string name;
 	int summ;
 	string currency;
-	float percent;
+	double percent;
 };
 
 struct Node {
@@ -148,9 +151,47 @@ void sort_by_name(DoulbyLinkedList& list)
 	}
 }
 
+vector<Deposit> read_data(string file_name)
+{
+	vector<Deposit> result;
+	string line;
+	ifstream inFile(file_name);
+	if (inFile)
+	{
+		while (getline(inFile, line))
+		{
+			Deposit currentDeposit;
+			string currentLine;
+			stringstream ss(line);
+			int counter = 0;
+			while (getline(ss, currentLine, ';'))
+			{
+				if (counter == 0) { currentDeposit.name = currentLine; }
+				else if (counter == 1) { currentDeposit.summ = stoi(currentLine); }
+				else if (counter == 2) { currentDeposit.currency = currentLine; }
+				else if (counter == 3) 
+				{
+					stringstream fl(currentLine);
+					double p;
+					fl >> p;
+					currentDeposit.percent = p; 
+				}
+				counter++;
+			}
+			result.push_back(currentDeposit);
+		}
+		return result;
+	}
+	else
+	{
+		return result;
+	}
+}
+
+
 int main()
 {
-	setlocale(LC_ALL, "Russian");
+	setlocale(LC_ALL, "ru_RU.UTF-8");
 	DoulbyLinkedList list;
 }
 
