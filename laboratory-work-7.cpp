@@ -125,28 +125,26 @@ void print_list(DoulbyLinkedList& list)
 
 void sort_by_name(DoulbyLinkedList& list)
 {
-	if (list.head == nullptr || list.head->next == nullptr)
+	if (list.head == nullptr || (*list.head).next == nullptr)
 	{
 		return;
 	}
-	bool swapped = true;
-	while (swapped)
-	{
-		swapped = false;
-		Node* current = list.head;
 
-		while ((*current).next != nullptr)
+	Node* current = (*list.head).next;
+
+	while (current != nullptr)
+	{
+
+		Node* nextNode = (*current).next;
+		Node* compareNode = (*current).prev;
+
+		while (compareNode != nullptr && (*compareNode).data.name > (*current).data.name)
 		{
-			if ((*current).data.name > (*current).next->data.name)
-			{
-				swap_node(list, current, (*current).next);
-				swapped = true;
-			}
-			else
-			{
-				current = (*current).next;
-			}
+			swap_node(list, compareNode, current);
+			compareNode = (*current).prev;
 		}
+
+		current = nextNode;
 	}
 }
 
