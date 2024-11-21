@@ -3,6 +3,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <locale>
+#include <Windows.h>
 
 using namespace std;
 
@@ -120,7 +122,11 @@ void print_list(DoulbyLinkedList& list)
 	Node* current = list.head;
 	while (current != nullptr)
 	{
-		cout << (*current).data.name << " ";
+		cout << "----------------------------------------" << endl;
+		cout << (*current).data.name << endl;
+		cout << (*current).data.summ << endl;
+		cout << (*current).data.currency << endl;
+		cout << (*current).data.percent << endl;
 		current = (*current).next;
 	}
 	cout << endl;
@@ -194,5 +200,4 @@ int main()
 	setlocale(LC_ALL, "ru_RU.UTF-8");
 	DoulbyLinkedList list;
 }
-
 
